@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xueyin.mp.mapper.EmployeeMapper">
+    <select id="listByXml" resultType="Employee">
+        select * from employee
+    </select>
+
+    <resultMap id="BaseResultMap" type="Employee" >
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+        <result column="admin" jdbcType="BIT" property="admin" />
+        <result column="dept_Id" property="deptId" />
+        <result column="d_id" property="department.id" />
+        <result column="d_name" property="department.name" />
+        <result column="d_sn" property="department.sn" />
+    </resultMap>
+
+    <select id="listByXmlJoin" resultMap="BaseResultMap">
+        select e.*, d.id d_id, d.name d_name, d.sn d_sn from employee e left join department d on e.dept_id = d.id
+    </select>
+
+</mapper>
+
